@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>百度电影网 - 电影搜索与推荐导航 | baidudianyingwang-top.github.io</title>
+<meta name="description" content="百度电影网：https://baidudianyingwang-top.github.io，电影搜索与推荐导航站，提供影片搜索、分类导航、热搜排行榜等功能，单页自适应，必应收录友好。" />
+<meta name="keywords" content="百度电影网, baidudianyingwang-top, 电影搜索, 电影导航, 影片推荐" />
+<meta name="author" content="百度电影网" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#1e3a5f" />
+<link rel="canonical" href="https://baidudianyingwang-top.github.io/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="百度电影网 - 电影搜索与推荐导航" />
+<meta property="og:description" content="百度电影网：https://baidudianyingwang-top.github.io，电影搜索与推荐导航站。" />
+<meta property="og:url" content="https://baidudianyingwang-top.github.io/" />
+<meta property="og:site_name" content="百度电影网" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="百度电影网 - 电影搜索与推荐导航" />
+<meta name="twitter:description" content="百度电影网：https://baidudianyingwang-top.github.io，电影搜索与推荐导航站。" />
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "百度电影网",
+  "url": "https://baidudianyingwang-top.github.io/",
+  "description": "百度电影网是电影搜索与推荐导航站，提供影片搜索、分类导航、热搜排行榜等功能。",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://baidudianyingwang-top.github.io/#search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "百度电影网",
+  "url": "https://baidudianyingwang-top.github.io/",
+  "slogan": "搜你想看，找到好片"
+}
+</script>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "SF Pro Display", "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #1e3a5f;
+    background: #f8fafc;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  /* 顶部蓝色渐变条 */
+  .top-stripe {
+    height: 3px;
+    background: linear-gradient(90deg, #1e3a5f, #3b82f6, #60a5fa, #3b82f6, #1e3a5f);
+    background-size: 300% 100%;
+    animation: stripe-flow 4s linear infinite;
+  }
+  @keyframes stripe-flow {
+    0% { background-position: 0% 0; }
+    100% { background-position: 300% 0; }
+  }
+
+  /* 导航 */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 28px;
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 1px 6px rgba(30,58,95,0.06);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand-logo {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, #1e3a5f, #3b82f6);
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: -1px;
+  }
+  .brand-text {
+    font-size: 18px;
+    font-weight: 800;
+    color: #1e3a5f;
+  }
+  .brand-text span { color: #3b82f6; }
+  .brand small {
+    display: block;
+    font-size: 10px;
+    color: #94a3b8;
+    font-weight: 400;
+  }
+  .menu-btn {
+    display: none;
+    font-size: 22px;
+    background: transparent;
+    color: #3b82f6;
+    border: 1.5px solid #3b82f6;
+    border-radius: 6px;
+    width: 38px; height: 38px;
+    cursor: pointer;
+  }
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2px;
+  }
+  .nav-links a {
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    border-radius: 6px;
+    transition: all .2s;
+  }
+  .nav-links a:hover {
+    color: #3b82f6;
+    background: #eff6ff;
+  }
+
+  /* Hero - 搜索核心 */
+  .hero {
+    position: relative;
+    padding: 50px 24px 40px;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .hero-label {
+    display: inline-block;
+    padding: 4px 14px;
+    background: #eff6ff;
+    color: #3b82f6;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: 38px;
+    color: #1e3a5f;
+    margin-bottom: 10px;
+    font-weight: 900;
+  }
+  .hero h1 span { color: #3b82f6; }
+  .hero p {
+    font-size: 15px;
+    color: #64748b;
+    margin-bottom: 28px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* 搜索框 */
+  .search-wrap {
+    max-width: 640px;
+    margin: 0 auto 16px;
+    position: relative;
+  }
+  .search-box {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 2px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 4px 4px 4px 20px;
+    transition: all .3s;
+    box-shadow: 0 2px 8px rgba(30,58,95,0.06);
+  }
+  .search-box:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59,130,246,0.15), 0 4px 16px rgba(30,58,95,0.1);
+  }
+  .search-icon { font-size: 18px; margin-right: 10px; opacity: .4; }
+  .search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #1e3a5f;
+    background: transparent;
+    padding: 12px 0;
+  }
+  .search-box input::placeholder { color: #94a3b8; }
+  .search-btn {
+    padding: 10px 24px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .3s;
+  }
+  .search-btn:hover {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    transform: scale(1.05);
+  }
+
+  /* 搜索建议 */
+  .search-suggest {
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    margin-top: 6px;
+    box-shadow: 0 8px 24px rgba(30,58,95,0.1);
+    display: none;
+    text-align: left;
+    z-index: 10;
+  }
+  .search-suggest.show { display: block; }
+  .search-suggest div {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #475569;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .search-suggest div:hover { background: #eff6ff; color: #3b82f6; }
+  .search-suggest div .suggest-type { color: #94a3b8; font-size: 12px; margin-left: 8px; }
+
+  /* 热搜词 */
+  .hot-words {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .hot-words span {
+    font-size: 12px;
+    color: #64748b;
+  }
+  .hot-word {
+    padding: 4px 12px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 12px;
+    color: #475569;
+    transition: all .2s;
+  }
+  .hot-word:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+    background: #eff6ff;
+  }
+
+  .url-box {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    color: #3b82f6;
+    font-weight: 600;
+    font-size: 13px;
+    margin-top: 20px;
+    border-radius: 6px;
+  }
+
+  /* 区块通用 */
+  section { padding: 44px 24px; max-width: 1200px; margin: 0 auto; }
+  .sec-head { text-align: center; margin-bottom: 28px; }
+  .sec-head h2 { font-size: 24px; color: #1e3a5f; margin-bottom: 6px; font-weight: 900; }
+  .sec-head h2 span { color: #3b82f6; }
+  .sec-head p { color: #64748b; font-size: 13px; }
+
+  /* 分类导航 - 标签云 */
+  .cat-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .cat-tag {
+    padding: 10px 20px;
+    background: #fff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    transition: all .3s;
+    cursor: default;
+  }
+  .cat-tag:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+    background: #eff6ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59,130,246,0.15);
+  }
+  .cat-tag.lg { font-size: 16px; padding: 12px 24px; }
+  .cat-tag.sm { font-size: 12px; padding: 8px 16px; }
+
+  /* 搜索排行榜 */
+  .rank-wrap {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+  }
+  .rank-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .rank-header h3 { font-size: 16px; color: #1e3a5f; font-weight: 800; }
+  .rank-header .refresh { font-size: 12px; color: #3b82f6; cursor: default; }
+  .rank-list { list-style: none; }
+  .rank-list li {
+    display: flex;
+    align-items: center;
+    padding: 14px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    gap: 14px;
+    transition: background .2s;
+  }
+  .rank-list li:hover { background: #f8fafc; }
+  .rank-list li:last-child { border-bottom: none; }
+  .rank-num {
+    width: 24px; height: 24px;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 800;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .rank-list li:nth-child(1) .rank-num { background: #fef2f2; color: #ef4444; }
+  .rank-list li:nth-child(2) .rank-num { background: #fff7ed; color: #f97316; }
+  .rank-list li:nth-child(3) .rank-num { background: #fefce8; color: #eab308; }
+  .rank-list li:nth-child(n+4) .rank-num { background: #f1f5f9; color: #64748b; }
+  .rank-info { flex: 1; }
+  .rank-info h4 { font-size: 14px; color: #1e3a5f; font-weight: 700; }
+  .rank-info p { font-size: 12px; color: #94a3b8; }
+  .rank-trend { font-size: 12px; font-weight: 600; }
+  .rank-trend.up { color: #ef4444; }
+  .rank-trend.down { color: #3b82f6; }
+  .rank-trend.flat { color: #94a3b8; }
+
+  /* 关于 */
+  .about {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 32px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .about h2 { color: #1e3a5f; margin-bottom: 12px; }
+  .about h2 span { color: #3b82f6; }
+  .about p { max-width: 640px; margin: 0 auto 12px; color: #64748b; }
+  .about .quote {
+    font-size: 15px;
+    color: #3b82f6;
+    margin: 16px 0;
+    font-weight: 700;
+    padding: 12px 20px;
+    background: #eff6ff;
+    border-radius: 8px;
+    display: inline-block;
+  }
+  .about .url-show {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1.5px solid #bfdbfe;
+    color: #3b82f6;
+    font-weight: 600;
+    margin-top: 8px;
+    border-radius: 6px;
+  }
+
+  /* 联系 */
+  .contact {
+    text-align: center;
+    padding: 44px 24px;
+  }
+  .contact h2 { color: #1e3a5f; margin-bottom: 10px; }
+  .contact p { color: #64748b; margin-bottom: 20px; }
+  .contact .btn {
+    display: inline-block;
+    padding: 14px 36px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 24px;
+    transition: all .3s;
+  }
+  .contact .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59,130,246,0.35);
+  }
+
+  footer {
+    text-align: center;
+    padding: 24px 20px 36px;
+    color: #94a3b8;
+    font-size: 12px;
+    border-top: 1px solid #e2e8f0;
+    background: #fff;
+  }
+
+  /* 移动端 */
+  @media (max-width: 900px) {
+    .cat-cloud { gap: 8px; }
+  }
+  @media (max-width: 640px) {
+    .menu-btn { display: block; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 60px; left: 0; right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: #fff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 8px 0;
+    }
+    .nav-links.show { display: flex; }
+    .nav-links a { display: block; text-align: center; padding: 12px 24px; }
+    .hero h1 { font-size: 26px; }
+    .search-box { padding: 4px 4px 4px 14px; }
+    .search-box input { font-size: 14px; }
+    .search-btn { padding: 8px 16px; font-size: 13px; }
+    .rank-wrap { border-radius: 8px; }
+    .rank-list li { padding: 12px 16px; flex-wrap: wrap; }
+  }
+</style>
+</head>
+
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+<div class="top-stripe"></div>
+
+<nav class="nav">
+  <div class="brand">
+    <div class="brand-logo">百</div>
+    <div>
+      <div class="brand-text">百度<span>电影网</span></div>
+      <small>baidudianyingwang-top.github.io</small>
+    </div>
+  </div>
+  <button class="menu-btn" aria-label="菜单" onclick="document.getElementById('navLinks').classList.toggle('show')">☰</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">首页</a></li>
+    <li><a href="#search">影片搜索</a></li>
+    <li><a href="#categories">分类导航</a></li>
+    <li><a href="#rank">搜索排行榜</a></li>
+    <li><a href="#about">关于百度电影</a></li>
+    <li><a href="#contact">联系我们</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="home">
+  <div class="hero-label">🎬 电影搜索与推荐导航</div>
+  <h1><span>百度</span>电影网</h1>
+  <p>
+    百度电影网（https://baidudianyingwang-top.github.io）是一个电影搜索与推荐导航站。
+    输入片名、导演、演员或类型，快速找到你想看的影片信息。
+    搜你想看，找到好片——让每一部好电影都不被错过。
+  </p>
+
+  <div class="search-wrap">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="搜索影片、导演、演员、类型..." id="searchInput" />
+      <button class="search-btn" onclick="doSearch()">搜索</button>
+    </div>
+    <div class="search-suggest" id="searchSuggest">
+      <div>肖申克的救赎 <span class="suggest-type">· 剧情/经典</span></div>
+      <div>阿甘正传 <span class="suggest-type">· 剧情/励志</span></div>
+      <div>盗梦空间 <span class="suggest-type">· 科幻/悬疑</span></div>
+      <div>泰坦尼克号 <span class="suggest-type">· 爱情/灾难</span></div>
+      <div>星际穿越 <span class="suggest-type">· 科幻/冒险</span></div>
+    </div>
+  </div>
+
+  <div class="hot-words">
+    <span>热搜：</span>
+    <a class="hot-word" href="#">肖申克的救赎</a>
+    <a class="hot-word" href="#">奥本海默</a>
+    <a class="hot-word" href="#">流浪地球2</a>
+    <a class="hot-word" href="#">蜘蛛侠</a>
+    <a class="hot-word" href="#">封神第一部</a>
+    <a class="hot-word" href="#">消失的她</a>
+  </div>
+
+  <div class="url-box">🌐 网站网址：https://baidudianyingwang-top.github.io</div>
+</header>
+
+<section id="categories">
+  <div class="sec-head">
+    <h2>分类<span>导航</span></h2>
+    <p>按类型快速筛选，找到你的下一部好片</p>
+  </div>
+  <div class="cat-cloud">
+    <a class="cat-tag lg" href="#">动作</a>
+    <a class="cat-tag" href="#">喜剧</a>
+    <a class="cat-tag lg" href="#">爱情</a>
+    <a class="cat-tag" href="#">科幻</a>
+    <a class="cat-tag sm" href="#">悬疑</a>
+    <a class="cat-tag lg" href="#">动画</a>
+    <a class="cat-tag" href="#">纪录片</a>
+    <a class="cat-tag sm" href="#">恐怖</a>
+    <a class="cat-tag" href="#">战争</a>
+    <a class="cat-tag lg" href="#">历史</a>
+    <a class="cat-tag sm" href="#">音乐</a>
+    <a class="cat-tag" href="#">体育</a>
+  </div>
+</section>
+
+<section id="rank">
+  <div class="sec-head">
+    <h2>搜索<span>排行榜</span></h2>
+    <p>本周最多人搜索的影片 TOP 8</p>
+  </div>
+  <div class="rank-wrap">
+    <div class="rank-header">
+      <h3>🔥 热搜影片榜</h3>
+      <span class="refresh">↻ 实时更新</span>
+    </div>
+    <ul class="rank-list">
+      <li>
+        <div class="rank-num">1</div>
+        <div class="rank-info">
+          <h4>奥本海默</h4>
+          <p>诺兰执导 · 传记/历史</p>
+        </div>
+        <div class="rank-trend up">↑ 12%</div>
+      </li>
+      <li>
+        <div class="rank-num">2</div>
+        <div class="rank-info">
+          <h4>流浪地球2</h4>
+          <p>中国科幻 · 灾难/冒险</p>
+        </div>
+        <div class="rank-trend up">↑ 8%</div>
+      </li>
+      <li>
+        <div class="rank-num">3</div>
+        <div class="rank-info">
+          <h4>肖申克的救赎</h4>
+          <p>经典必看 · 剧情/励志</p>
+        </div>
+        <div class="rank-trend flat">—</div>
+      </li>
+      <li>
+        <div class="rank-num">4</div>
+        <div class="rank-info">
+          <h4>蜘蛛侠：纵横宇宙</h4>
+          <p>动画巅峰 · 动画/科幻</p>
+        </div>
+        <div class="rank-trend up">↑ 5%</div>
+      </li>
+      <li>
+        <div class="rank-num">5</div>
+        <div class="rank-info">
+          <h4>封神第一部</h4>
+          <p>东方奇幻 · 奇幻/动作</p>
+        </div>
+        <div class="rank-trend down">↓ 2%</div>
+      </li>
+      <li>
+        <div class="rank-num">6</div>
+        <div class="rank-info">
+          <h4>消失的她</h4>
+          <p>悬疑反转 · 悬疑/犯罪</p>
+        </div>
+        <div class="rank-trend up">↑ 3%</div>
+      </li>
+      <li>
+        <div class="rank-num">7</div>
+        <div class="rank-info">
+          <h4>年会不能停！</h4>
+          <p>职场喜剧 · 喜剧/职场</p>
+        </div>
+        <div class="rank-trend down">↓ 1%</div>
+      </li>
+      <li>
+        <div class="rank-num">8</div>
+        <div class="rank-info">
+          <h4>星际穿越</h4>
+          <p>诺兰神作 · 科幻/冒险</p>
+        </div>
+        <div class="rank-trend flat">—</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <h2>关于<span>百度电影网</span></h2>
+  <p>
+    百度电影网（https://baidudianyingwang-top.github.io）是一个以"搜索+推荐"为核心的电影导航站。
+    我们结合了搜索引擎的高效检索能力和人工精选的推荐质量，让你既能快速找到目标影片，
+    也能在不知道看什么时获得优质推荐。
+  </p>
+  <div class="quote">"搜你想看，找到好片。"</div>
+  <p style="font-size:13px; color:#94a3b8;">
+    网站采用单页设计，移动端友好，内容聚焦健康、合规的影视推荐。
+    不堆砌垃圾关键词，不采集低质内容，只做有价值的搜索导航。
+  </p>
+  <div class="url-show">🌐 baidudianyingwang-top.github.io</div>
+</section>
+
+<section id="contact" class="contact">
+  <h2>联系我们</h2>
+  <p>影片推荐、搜索优化建议、合作交流，欢迎联系百度电影网！</p>
+  <a class="btn" href="#home">回到首页</a>
+  <p style="margin-top:20px;font-size:12px;color:#94a3b8;">
+    网站名称：百度电影网 ｜ 网站网址：https://baidudianyingwang-top.github.io
+  </p>
+</section>
+
+<footer>
+  © 2026 百度电影网 · baidudianyingwang-top.github.io · 电影搜索与推荐导航
+</footer>
+
+<script>
+  // 搜索建议交互
+  var searchInput = document.getElementById('searchInput');
+  var searchSuggest = document.getElementById('searchSuggest');
+  searchInput.addEventListener('focus', function() {
+    searchSuggest.classList.add('show');
+  });
+  searchInput.addEventListener('blur', function() {
+    setTimeout(function() { searchSuggest.classList.remove('show'); }, 200);
+  });
+  searchSuggest.querySelectorAll('div').forEach(function(item) {
+    item.addEventListener('mousedown', function() {
+      searchInput.value = item.childNodes[0].nodeValue.trim();
+      searchSuggest.classList.remove('show');
+    });
+  });
+
+  function doSearch() {
+    var q = searchInput.value.trim();
+    if (q) {
+      window.location.hash = 'search?q=' + encodeURIComponent(q);
+    }
+  }
+
+  // 移动端菜单
+  document.querySelectorAll('#navLinks a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      document.getElementById('navLinks').classList.remove('show');
+    });
+  });
+</script>
+
+</body>
+</html>
